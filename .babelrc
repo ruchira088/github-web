@@ -1,0 +1,9 @@
+{
+  "presets": ["react", "env"],
+  "plugins": [
+    "transform-runtime",
+    "transform-async-to-generator",
+    "transform-class-properties",
+    "transform-object-rest-spread"
+  ]
+}

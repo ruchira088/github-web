@@ -1,0 +1,1 @@
+export const API_DATE_FORMAT = "ddd MMM D kk:mm:ss Z YYYY"

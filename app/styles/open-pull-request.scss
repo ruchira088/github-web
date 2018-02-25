@@ -1,0 +1,32 @@
+@import "./configs";
+
+.open-pull-request {
+  display: flex;
+
+  .pull-request-card {
+    flex: 1;
+  }
+
+  .merge-status {
+    align-items: center;
+    display: inline-flex;
+
+    .merge-disabled, .merge-enabled {
+      border: 1px solid black;
+      padding: 0.5em;
+      border-radius: 0.5em;
+    }
+
+    .merge-enabled {
+      background-color: $primary-color;
+      color: $primary-complementary-color;
+      cursor: pointer;
+      border-color: transparent;
+
+      &:hover {
+        background-color: $secondary-color;
+        color: $secondary-complementary-color;
+      }
+    }
+  }
+}

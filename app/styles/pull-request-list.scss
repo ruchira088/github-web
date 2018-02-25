@@ -1,0 +1,12 @@
+.pull-request-list {
+  display: inline-block;
+  min-width: 40%;
+  text-align: left;
+
+  .open-pull-request, .closed-pull-request {
+    border: 1px solid black;
+    margin: 0.5em;
+    padding: 0.5em;
+    border-radius: 0.5em;
+  }
+}

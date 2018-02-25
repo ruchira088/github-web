@@ -2,6 +2,8 @@ import React from "react"
 import LoadingIcon from "components/LoadingIcon"
 import PullRequestCard from "pages/PullRequestCard"
 
+import "styles/open-pull-request.scss"
+
 export default class OpenPullRequest extends React.Component
 {
     constructor(props) {
@@ -21,19 +23,30 @@ export default class OpenPullRequest extends React.Component
         this.setState({ mergeable, loading: false })
     }
 
-    mergeButton = mergeable => mergeable ? <div>Merge</div> : <div>Outdated</div>
+    mergeButton = () => {
+        const { mergeable } = this.state
+        const { onSelect } = this.props
+
+        if (mergeable) {
+            return <div onClick={onSelect} className="merge-enabled">Merge</div>
+        } else {
+            return <div className="merge-disabled">Outdated</div>
+        }
+    }
 
     mergeStatus = () => {
-        const { mergeable, loading } = this.state
+        const { loading } = this.state
 
-        return loading ? <LoadingIcon/> : this.mergeButton(mergeable)
+        return loading ? <LoadingIcon/> : this.mergeButton()
     }
 
     render() {
         return (
             <div className="open-pull-request">
                 <PullRequestCard {...this.props}/>
-                { this.mergeStatus() }
+                <div className="merge-status">
+                    { this.mergeStatus() }
+                </div>
             </div>
         )
     }

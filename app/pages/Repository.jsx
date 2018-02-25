@@ -37,6 +37,8 @@ export default class Repository extends React.Component
     fetchPullRequests = async () => {
         const { user, repositoryName } = this.getUserAndRepoName()
 
+        this.setState({ loading: true })
+
         const [ openPullRequests, closedPullRequests ] = await Promise.all([
             getOpenPullRequests(user, repositoryName),
             getClosedPullRequests(user, repositoryName)
@@ -51,7 +53,7 @@ export default class Repository extends React.Component
         const { user, repositoryName } = this.getUserAndRepoName()
 
         return loading ?
-            <LoadingIcon/> :
+            <LoadingIcon label="Fetching pull requests" className="page"/> :
             <PullRequestList
                 openPullRequests={openPullRequests}
                 closedPullRequests={closedPullRequests}

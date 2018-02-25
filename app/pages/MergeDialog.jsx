@@ -1,5 +1,9 @@
 import React from "react"
+import moment from "moment"
 import { merge } from "services/gitHubService"
+import { API_DATE_FORMAT } from "services/constants"
+
+import "styles/merge-dialog.scss"
 
 export default class MergeDialog extends React.Component
 {
@@ -31,18 +35,24 @@ export default class MergeDialog extends React.Component
 
     render() {
         const { message } = this.state
-        const { onClose } = this.props
+        const { onClose, pullRequest } = this.props
 
         return (
             <div className="merge-dialog">
-                <div className="commit-message-box">
+                <div className="merge-dialog-box">
+                    <div className="merge-dialog-title">
+                        { pullRequest.title } ({ moment(pullRequest.createdAt, API_DATE_FORMAT).fromNow() })
+                    </div>
+                    <div className="commit-message-box">
                     <textarea
                         placeholder="Enter merge message..."
                         value={message}
-                        onChange={this.onMessageChange}/>
+                        onChange={this.onMessageChange}
+                        className="merge-message"/>
+                    </div>
+                    <button onClick={this.mergePullRequest} className="button">Merge</button>
+                    <button onClick={onClose} className="button">Cancel</button>
                 </div>
-                <button onClick={this.mergePullRequest}>Merge</button>
-                <button onClick={onClose}>Cancel</button>
             </div>
         )
     }

@@ -26,7 +26,7 @@ export default class HomePage extends React.Component
         const { loading, repositories } = this.state
 
         return loading ?
-            <LoadingIcon label="Loading Repositories"/> :
+            <LoadingIcon label="Loading repositories" className="page"/> :
             <RepositoryList repositories={repositories}/>
     }
 

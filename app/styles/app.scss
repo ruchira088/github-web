@@ -1,5 +1,11 @@
 .app {
-    font-family: "Roboto", sans-serif;
-    padding: 1em;
-    text-align: center;
+  font-family: "Roboto", sans-serif;
+  padding: 1em;
+  text-align: center;
+
+  .loading-icon.page {
+    width: 15em;
+    display: inline-block;
+    margin-top: 2em;
+  }
 }

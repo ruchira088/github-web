@@ -30,7 +30,7 @@ export default class OpenPullRequest extends React.Component
         if (mergeable) {
             return <div onClick={onSelect} className="merge-enabled">Merge</div>
         } else {
-            return <div className="merge-disabled">Outdated</div>
+            return <div className="merge-disabled">Unable to merge</div>
         }
     }
 

@@ -33,7 +33,7 @@ export default class HomePage extends React.Component
     render() {
         return (
             <div className="home-page">
-                <div className="home-page-title">
+                <div className="page-title">
                     Repository List
                 </div>
                 <div className="home-page-body">

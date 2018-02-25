@@ -4,6 +4,7 @@ import { getOpenPullRequests, getClosedPullRequests } from "services/gitHubServi
 import PullRequestList from "pages/PullRequestList"
 import LoadingIcon from "components/LoadingIcon"
 import MergeDialog from "./MergeDialog"
+import PullRequestFilter from "./PullRequestFilter"
 
 import "styles/repository.scss"
 
@@ -16,6 +17,8 @@ export default class Repository extends React.Component
             loading: true,
             openPullRequests: [],
             closedPullRequests: [],
+            showOpenRequests: true,
+            showClosedRequests: true,
             showMergeDialog: false,
             selectedPullRequestId: undefined
         }
@@ -47,8 +50,17 @@ export default class Repository extends React.Component
         this.setState({ openPullRequests, closedPullRequests, loading: false })
     }
 
+    onOpenFilterChange = showOpenRequests => {
+        this.setState({ showOpenRequests })
+    }
+
+    onClosedFilterChange = showClosedRequests => {
+        this.setState({ showClosedRequests })
+    }
+
+
     getBody = () => {
-        const { openPullRequests, closedPullRequests, loading } = this.state
+        const { openPullRequests, closedPullRequests, loading, showClosedRequests, showOpenRequests } = this.state
 
         const { user, repositoryName } = this.getUserAndRepoName()
 
@@ -57,10 +69,15 @@ export default class Repository extends React.Component
             <PullRequestList
                 openPullRequests={openPullRequests}
                 closedPullRequests={closedPullRequests}
+                onClosedFilterChange={this.onClosedFilterChange}
+                onOpenFilterChange={this.onOpenFilterChange}
+                showOpenRequests={showOpenRequests}
+                showClosedRequests={showClosedRequests}
                 user={user}
                 repository={repositoryName}
                 onSelect={this.setSelectedPullRequestId}
             />
+
     }
 
     setSelectedPullRequestId = selectedPullRequestId => {
@@ -95,11 +112,12 @@ export default class Repository extends React.Component
     }
 
     render() {
-        const { match: { params }} = this.props
+        const { repositoryName } = this.getUserAndRepoName()
+
         return (
             <div className="repository">
-                <div className="repository-title">
-                    { params.repoName }
+                <div className="repository-title page-title">
+                    { repositoryName }
                 </div>
                 <Link to="/">Back</Link>
                 <div className="repository-content">

@@ -1,6 +1,5 @@
 import React from "react"
-import moment from "moment"
-import { API_DATE_FORMAT } from "services/constants"
+import { relativeTime } from "utils/generalUtils"
 
 export default ({ number, title, state, createdAt }) => (
     <div className="pull-request-card">
@@ -14,7 +13,7 @@ export default ({ number, title, state, createdAt }) => (
             { state.toUpperCase() }
         </div>
         <div className="pull-request-created-data">
-            { moment(createdAt, API_DATE_FORMAT).fromNow() }
+            { relativeTime(createdAt) }
         </div>
     </div>
 )

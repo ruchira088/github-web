@@ -1,8 +1,7 @@
 import React from "react"
-import moment from "moment"
 import LoadingIcon from "components/LoadingIcon"
 import { merge } from "services/gitHubService"
-import { API_DATE_FORMAT } from "services/constants"
+import { relativeTime } from "utils/generalUtils"
 
 import "styles/merge-dialog.scss"
 
@@ -45,7 +44,7 @@ export default class MergeDialog extends React.Component
         return (
             <div>
                 <div className="merge-dialog-title">
-                    { pullRequest.title } ({ moment(pullRequest.createdAt, API_DATE_FORMAT).fromNow() })
+                    { pullRequest.title } ({ relativeTime(pullRequest.createdAt) })
                 </div>
                 <div className="commit-message-box">
                     <textarea

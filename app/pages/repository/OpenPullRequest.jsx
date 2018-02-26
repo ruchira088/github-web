@@ -1,6 +1,6 @@
 import React from "react"
 import LoadingIcon from "components/LoadingIcon"
-import PullRequestCard from "pages/PullRequestCard"
+import PullRequestCard from "./PullRequestCard"
 
 import "styles/open-pull-request.scss"
 

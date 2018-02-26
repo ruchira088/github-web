@@ -40,7 +40,8 @@ module.exports = {
             pages: fromAppPath("pages"),
             services: fromAppPath("services"),
             assets: fromAppPath("assets"),
-            components: fromAppPath("components")
+            components: fromAppPath("components"),
+            utils: fromAppPath("utils")
         }
     }
 

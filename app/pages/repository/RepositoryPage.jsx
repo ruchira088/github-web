@@ -1,10 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { getOpenPullRequests, getClosedPullRequests } from "services/gitHubService"
-import PullRequestList from "pages/PullRequestList"
+import PullRequestList from "./PullRequestList"
 import LoadingIcon from "components/LoadingIcon"
 import MergeDialog from "./MergeDialog"
-import PullRequestFilter from "./PullRequestFilter"
 
 import "styles/repository.scss"
 

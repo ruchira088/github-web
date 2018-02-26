@@ -1,7 +1,7 @@
 import React from "react"
 import { BrowserRouter as Router, Route } from "react-router-dom"
-import HomePage from "pages/HomePage"
-import Repository from "pages/Repository"
+import HomePage from "pages/home/HomePage"
+import Repository from "pages/repository/RepositoryPage"
 
 export default () => (
     <Router>

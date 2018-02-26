@@ -15,10 +15,22 @@
     display: inline-block;
     border-radius: 0.5em;
 
+    .merge-dialog-title {
+      font-size: 1.5em;
+      padding: 0.5em;
+      font-weight: bold;
+    }
+
+    .loading-icon {
+      width: 9em;
+      padding: 1em;
+      display: inline-block;
+    }
+
     .merge-message {
       width: 80%;
       height: 4em;
-      font-size: 1.5em;
+      font-size: 1.2em;
       padding: 0.5em;
       resize: none;
     }

@@ -1,5 +1,6 @@
 import React from "react"
 import moment from "moment"
+import LoadingIcon from "components/LoadingIcon"
 import { merge } from "services/gitHubService"
 import { API_DATE_FORMAT } from "services/constants"
 
@@ -11,7 +12,8 @@ export default class MergeDialog extends React.Component
         super(props)
 
         this.state = {
-            message: ""
+            message: "",
+            loading: false
         }
     }
 
@@ -23,35 +25,50 @@ export default class MergeDialog extends React.Component
         const { message } = this.state
         const { user, repositoryName, pullRequest, onSuccess } = this.props
 
-        const { isMerged } = await merge(user, repositoryName)(pullRequest.number, message)
+        this.setState({ loading: true })
+
+        const { isMerged, message: responseMessage } = await merge(user, repositoryName)(pullRequest.number, message)
 
         if (isMerged) {
+            console.log(responseMessage)
+            this.setState({ loading: false })
             onSuccess()
         } else {
-            console.error("")
+            console.error("Unable to merge pull request.")
         }
-
     }
 
-    render() {
+    dialogBoxContent = () => {
         const { message } = this.state
         const { onClose, pullRequest } = this.props
 
         return (
-            <div className="merge-dialog">
-                <div className="merge-dialog-box">
-                    <div className="merge-dialog-title">
-                        { pullRequest.title } ({ moment(pullRequest.createdAt, API_DATE_FORMAT).fromNow() })
-                    </div>
-                    <div className="commit-message-box">
+            <div>
+                <div className="merge-dialog-title">
+                    { pullRequest.title } ({ moment(pullRequest.createdAt, API_DATE_FORMAT).fromNow() })
+                </div>
+                <div className="commit-message-box">
                     <textarea
                         placeholder="Enter merge message..."
                         value={message}
                         onChange={this.onMessageChange}
                         className="merge-message"/>
-                    </div>
-                    <button onClick={this.mergePullRequest} className="button">Merge</button>
-                    <button onClick={onClose} className="button">Cancel</button>
+                </div>
+                <button onClick={this.mergePullRequest} className="button">Merge</button>
+                <button onClick={onClose} className="button">Cancel</button>
+            </div>
+        )
+    }
+
+    loadingDialog = () => <LoadingIcon label="Merging pull request"/>
+
+    render() {
+        const { loading } = this.state
+
+        return (
+            <div className="merge-dialog">
+                <div className="merge-dialog-box">
+                    { loading ? this.loadingDialog() : this.dialogBoxContent() }
                 </div>
             </div>
         )

@@ -54,7 +54,11 @@ export default class App extends React.Component
         const { errors } = this.state
 
         if (errors.length == 0) {
-            return <AppRouter/>
+            return (
+                <div className="app">
+                    <AppRouter/>
+                </div>
+            )
         } else {
             return <ApiServerErrors errors={errors}/>
         }

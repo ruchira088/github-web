@@ -6,9 +6,9 @@ const fromAppPath = (...filePaths) =>
 module.exports = {
     entry: fromAppPath("Index.jsx"),
     output: {
-        path: path.resolve(__dirname, "public", "build"),
+        path: path.resolve(__dirname, "public", "build/"),
         filename: "bundle.js",
-        publicPath: "/build"
+        publicPath: "/build/"
     },
     devServer: {
         contentBase: path.resolve(__dirname, "public"),

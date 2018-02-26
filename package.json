@@ -2,15 +2,19 @@
   "name": "github-web",
   "version": "0.0.1",
   "description": "Front-end for the GitHub web app",
-  "main": "index.js",
+  "main": "./server/index.js",
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server",
-    "build": "webpack --progress --colors"
+    "build": "webpack --progress --colors",
+    "start-server": "node .",
+    "start": "yarn clean && yarn build && yarn start-server",
+    "clean": "rm -rf public/build"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.5",
+    "express": "^4.16.2",
     "moment": "^2.20.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

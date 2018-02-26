@@ -33,5 +33,7 @@ export const merge =
         return response.data
     }
 
+export const ping = () => axiosClient.get("/")
+
 export const getClosedPullRequests = getPullRequests("closed")
 export const getOpenPullRequests = getPullRequests("open")

@@ -45,9 +45,13 @@ export default class App extends React.Component
                 if (response === undefined) {
                     this.setState({ serviceAvailable: false })
                 } else {
-                    this.setState({ errors: [response.data] })
+                    this.setServerErrors(response.data)
                 }
             })
+    }
+
+    setServerErrors = errors => {
+        this.setState({ errors: [].concat(errors) })
     }
 
     getServiceBody = () => {
@@ -56,7 +60,7 @@ export default class App extends React.Component
         if (errors.length == 0) {
             return (
                 <div className="app">
-                    <AppRouter/>
+                    <AppRouter onServerError={this.setServerErrors}/>
                 </div>
             )
         } else {

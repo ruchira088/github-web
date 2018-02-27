@@ -16,10 +16,16 @@ export default class HomePage extends React.Component
         }
     }
 
-    async componentDidMount() {
-        const repositories = await getRepositories()
+    componentDidMount() {
+        const { onServerError } = this.props
 
-        this.setState({ repositories, loading: false })
+        getRepositories()
+            .then(repositories => {
+                this.setState({ repositories, loading: false })
+            })
+            .catch(({ response }) => {
+                onServerError(response.data)
+            })
     }
 
     getBody = () => {

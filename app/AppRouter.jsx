@@ -1,13 +1,14 @@
 import React from "react"
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import { BrowserRouter as Router } from "react-router-dom"
+import PropRoute from "components/PropRoute"
 import HomePage from "pages/home/HomePage"
 import Repository from "pages/repository/RepositoryPage"
 
-export default () => (
+export default ({ onServerError }) => (
     <Router>
         <div>
-            <Route exact path="/" component={HomePage}/>
-            <Route path="/repository/:user/:repoName" component={Repository}/>
+            <PropRoute exact path="/" component={HomePage} onServerError={onServerError}/>
+            <PropRoute path="/repository/:user/:repoName" component={Repository} onServerError={onServerError}/>
         </div>
     </Router>
 )

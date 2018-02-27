@@ -36,17 +36,22 @@ export default class Repository extends React.Component
         }
     }
 
-    fetchPullRequests = async () => {
+    fetchPullRequests = () => {
+        const { onServerError } = this.props
         const { user, repositoryName } = this.getUserAndRepoName()
 
         this.setState({ loading: true })
 
-        const [ openPullRequests, closedPullRequests ] = await Promise.all([
+        Promise.all([
             getOpenPullRequests(user, repositoryName),
             getClosedPullRequests(user, repositoryName)
         ])
-
-        this.setState({ openPullRequests, closedPullRequests, loading: false })
+            .then(([ openPullRequests, closedPullRequests ]) => {
+                this.setState({ openPullRequests, closedPullRequests, loading: false })
+            })
+            .catch(({ response }) => {
+                onServerError(response.data)
+            })
     }
 
     onOpenFilterChange = showOpenRequests => {

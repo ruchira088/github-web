@@ -6,7 +6,7 @@ import "styles/app.scss"
 
 const ApiServerUnavailable = () => (
     <div className="api-server-unavailable">
-        API server is NOT available
+        API server is NOT available at { process.env.API_SERVER }
     </div>
 )
 

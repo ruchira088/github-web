@@ -1,3 +1,4 @@
+const webpack = require("webpack")
 const path = require("path")
 
 const fromAppPath = (...filePaths) =>
@@ -43,7 +44,10 @@ module.exports = {
             components: fromAppPath("components"),
             utils: fromAppPath("utils")
         }
-    }
-
-
+    },
+    plugins: [
+        new webpack.EnvironmentPlugin({
+            API_SERVER: "http://localhost:8000"
+        })
+    ]
 }
